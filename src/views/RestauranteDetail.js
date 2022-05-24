@@ -1,54 +1,108 @@
-import React, { Component, useState } from 'react'
-import { SafeAreaView, Text, View, StyleSheet, Image, Modal } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import React from 'react';
+import { View, FlatList, StyleSheet, Text, StatusBar, Image } from 'react-native';
 
+const DATA = [
+    {
+        produto: 'Hamburguer Picanha',
+        quantia: 'R$: 30,00',
+        img: 'https://salvadornorteonline.com.br/salvadornorteonline/2020/11/McOferta-cheddar-picanha-bacon.jpg'
+    },
+    {
+        produto: 'Hamburguer Rodeio',
+        quantia: 'R$: 25,00',
+        img: 'https://d3sn2rlrwxy0ce.cloudfront.net/maga-stacker-4-thumb.png?mtime=20210916133348&focal=none'
+    },
+    {
+        produto: 'McChicken',
+        quantia: 'R$: 20,00',
+        img: 'https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXZKLM5/200/200/original?country=br',
+    },
+    {
+        produto: 'McFritas',
+        quantia: 'R$: 30,00',
+        img: 'https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXZKLM5/200/200/original?country=br',
+    },
+    {
+        produto: 'Podrão',
+        quantia: 'R$: 5,00',
+        img: 'https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXZKLM5/200/200/original?country=br',
+    },
+];
+
+const Item = ({ produto, quantia, img }) => (
+    <View style={styles.item}>
+
+        <Image
+            style={styles.imagemProduto}
+            source={{ uri: img }}
+        />
+        <View style={{ padding: 8 }}>
+            <Text style={styles.tituloProduto}>{produto}</Text>
+            <Text style={styles.descProduto}>{quantia}</Text>
+        </View>
+    </View>
+);
+
+const App = () => {
+    const renderItem = ({ item }) => (
+
+        <Item produto={item.produto} quantia={item.quantia} img={item.img} />
+
+    );
+
+    return (
+        <View style={styles.container}>
+            <View >
+                <View style={styles.viewRest}>
+
+                    <Image
+                        style={styles.imageCard}
+                        source={{ uri: 'https://iguatemi.com.br/brasilia/sites/brasilia/files/2018-04/Burguer.png' }}
+                    />
+
+
+
+                    <View style={styles.card}>
+
+                        <Text style={styles.txtHome}>
+                            Burguer King
+                        </Text>
+                        <Text>
+                            Descrição do Restaurante
+                        </Text>
+                    </View>
+
+                </View>
+
+
+                <FlatList
+                    data={DATA}
+                    renderItem={renderItem}
+                    // horizontal={true}
+                    numColumns={2}
+                    style={{ flexWrap: 'wrap' }}
+                />
+            </View>
+
+
+        </View>
+    );
+}
 
 const styles = StyleSheet.create({
-
     container: {
-        height: '100%',
-        // alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
+
         width: '100%',
-    },
-    modalBackground: {
-        height: '100%',
-        alignItems: 'center',
-        // justifyContent: 'flex-end',
-        alignSelf: 'center',
-        width: '100%',
-        backgroundColor: '#A5A6F6',
-    },
-    modalPrincipal: {
-        height: '85%',
-        // alignItems: 'center',
-        justifyContent: 'flex-start',
-        alignSelf: 'flex-start',
-        width: '100%',
+        height: '75%',
+        flexWrap: 'wrap',
+        // flexDirection:'row',
+        // flexWrap:'flex-wrap',
+
         backgroundColor: 'white',
-        borderTopRightRadius: 35,
-        borderTopLeftRadius: 35,
-
-
-    },
-    purpleView: {
-        height: '20%',
-
-        // justifyContent: 'center',
-        // alignSelf: 'center',
-        flexDirection: 'row',
-        width: '100%',
-        backgroundColor: '#A5A6F6',
-        borderTopRightRadius: 35,
-        borderTopLeftRadius: 35,
-        padding: 30,
-
-
+        marginTop: StatusBar.currentHeight || 0,
     },
     viewRest: {
-        height: '30%',
+        height: '25%',
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
         flexDirection: 'row',
@@ -57,14 +111,37 @@ const styles = StyleSheet.create({
 
     },
 
-    imagePub: {
+    item: {
+        backgroundColor: '#EEEEEE',
+        borderRadius: 20,
 
-        width: 200,
+        alignItems: 'center',
+        padding: 8,
+        marginVertical: 8,
+        marginHorizontal: 10,
+        width: '45%',
+
+
+    },
+    card: {
+
+        padding: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+
+    tituloProduto: {
+        fontSize: 20,
+    },
+    descProduto: {
+        fontSize: 10,
+        color: 'gray'
+    },
+    imagemProduto: {
         height: 120,
-        marginTop: 15,
-        marginBottom: 25,
-        marginLeft: 15,
         borderRadius: 10,
+        width: 120
     },
     imageCard: {
 
@@ -74,171 +151,6 @@ const styles = StyleSheet.create({
         marginBottom: 8,
         borderRadius: 10,
     },
-    card: {
-
-        padding: 20,
-        backgroundColor: '#EEEEEE',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    cardProd: {
-
-
-        backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-
-    },
-    containerProds: {
-
-        alignItems: 'flex-start',
-
-        alignSelf: 'center',
-        height: '70%',
-        width: '90%',
-    },
-    txtHome: {
-        fontSize: 18,
-        fontWeight: '500',
-    },
-    btnSubmit: {
-        backgroundColor: '#7677FF',
-        width: '100%',
-        height: '80%',
-        alignItems: 'center',
-        justifyContent: 'center',
-
-        borderRadius: 25,
-        marginBottom: 15,
-        alignContent: 'flex-end'
-
-
-    }
-
 });
 
-const bkImg = 'https://classic.exame.com/wp-content/uploads/2022/05/costelinha.jpg?quality=70&strip=info&w=1024'
-
-class Restaurante extends Component {
-
-    // const [modalVisible, setModalVisible] = useState(false);
-
-    state = {
-        modalVisible: false
-    };
-
-    setModalVisible = (visible) => {
-        this.setState({ modalVisible: visible });
-    }
-
-
-
-    render() {
-        const { modalVisible } = this.state;
-
-        return (
-            <SafeAreaView>
-
-                <View style={styles.container}>
-                    <View style={styles.viewRest}>
-
-                        <Image
-                            style={styles.imageCard}
-                            source={{ uri: 'https://iguatemi.com.br/brasilia/sites/brasilia/files/2018-04/Burguer.png' }}
-                        />
-
-
-
-                        <View style={styles.card}>
-
-                            <Text style={styles.txtHome}>
-                                Burguer King
-                            </Text>
-                            <Text>
-                                Descrição do Restaurante
-                            </Text>
-                        </View>
-
-                    </View>
-                    <View style={styles.containerProds}>
-                        <Text style={styles.txtHome}>
-                            Produtos
-                        </Text>
-                        <TouchableOpacity onPress={this.setModalVisible}>
-
-                            <View style={styles.cardProd}>
-                                <Image
-                                    style={styles.imageCard}
-                                    source={{ uri: bkImg }}
-                                />
-                                <Text>R$15,80</Text>
-                                <Text>BK Costelinha</Text>
-
-                            </View>
-                        </TouchableOpacity>
-
-                    </View>
-                    <View>
-                        <Modal
-                            animationType="slide"
-                            transparent={false}
-                            visible={modalVisible}
-                            onRequestClose={() => {
-                                this.setModalVisible(!modalVisible);
-                            }}
-                        >
-                            <View style={styles.modalBackground}>
-                                <View style={{ alignSelf: 'flex-start', padding: 20 }}>
-                                    <TouchableOpacity onPress={() => this.setModalVisible}>
-
-                                        <MaterialCommunityIcons name="arrow-left" color={'#667080'} size={30} />
-                                    </TouchableOpacity>
-
-
-                                </View>
-                                <View style={styles.modalPrincipal}>
-                                    <View style={{ height: '87%', padding: 30 }}>
-
-                                        <View style={styles.cardProd}>
-                                            <Image
-                                                style={styles.imageCard}
-                                                source={{ uri: bkImg }}
-                                            />
-                                            <Text>R$15,80</Text>
-                                            <Text>BK Costelinha</Text>
-
-                                        </View>
-                                    </View>
-
-                                    <View style={styles.purpleView}>
-                                        <View style={{ width: '50%' }}>
-                                            <Text>Preço</Text>
-                                            <Text>R$12,00</Text>
-
-                                        </View >
-                                        <View style={{ width: '50%' }}>
-                                            <TouchableOpacity style={styles.btnSubmit} onPress={() => {
-                                                this.setState({ modalVisible: false });
-                                            }}>
-                                                <Text style={{ color: 'white', fontWeight: '600' }}>+ Carrinho</Text>
-                                            </TouchableOpacity>
-
-                                        </View>
-                                    </View>
-                                </View>
-                            </View>
-
-                        </Modal>
-                    </View>
-
-
-                </View>
-
-            </SafeAreaView>
-
-        )
-    }
-}
-
-
-export default Restaurante;
+export default App;

@@ -3,25 +3,28 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Press
 
 const DATA = [
   {
-    produto: 'Produto 1',
-    quantia: 'R$: 5,00',
+    produto: 'Hamburguer Picanha',
+    quantia: 'R$: 30,00',
+    img: 'https://salvadornorteonline.com.br/salvadornorteonline/2020/11/McOferta-cheddar-picanha-bacon.jpg'
   },
   {
-    produto: 'Produto 2',
-    quantia: 'R$: 5,00',
+    produto: 'Hamburguer Rodeio',
+    quantia: 'R$: 25,00',
+    img: 'https://d3sn2rlrwxy0ce.cloudfront.net/maga-stacker-4-thumb.png?mtime=20210916133348&focal=none'
   },
   {
-    produto: 'Produto 3',
-    quantia: 'R$: 5,00',
+    produto: 'McChicken',
+    quantia: 'R$: 20,00',
+    img: 'https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXZKLM5/200/200/original?country=br',
   },
 ];
 
-const Item = ({ produto, quantia }) => (
+const Item = ({ produto, quantia, img }) => (
   <View style={styles.item}>
 
     <Image
       style={styles.imagemProduto}
-      source={{ uri: 'https://iguatemi.com.br/brasilia/sites/brasilia/files/2018-04/Burguer.png' }}
+      source={{ uri: img }}
     />
     <View style={{ padding: 8 }}>
       <Text style={styles.tituloProduto}>{produto}</Text>
@@ -32,7 +35,7 @@ const Item = ({ produto, quantia }) => (
 
 const App = () => {
   const renderItem = ({ item }) => (
-    <Item produto={item.produto} quantia={item.quantia} />
+    <Item produto={item.produto} quantia={item.quantia} img={item.img} />
   );
 
   return (
@@ -99,9 +102,9 @@ const styles = StyleSheet.create({
     color: 'gray'
   },
   imagemProduto: {
-    height: 50,
+    height: 100,
     borderRadius: 10,
-    width: 50
+    width: 120
   }
 });
 
