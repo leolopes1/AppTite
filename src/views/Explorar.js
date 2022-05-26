@@ -58,17 +58,21 @@ const App = () => {
 
     return (
         <View style={styles.container}>
-            <View >
-                <View style={{ height: '15%' }}>
+            <View style={{padding: 10}}>
+                <View style={{ height: '12%' }}>
+                  <View style={styles.explorarPesquisar}>
                     <TextInput
                         style={styles.input}
                         placeholder='Procurar'
                         autoCorrect={false}
                         onChangeText={() => { }}
                     />
+                    <Pressable>
+          <Image style={styles.explorarPesquisarIcone} source={'https://icons.iconarchive.com/icons/praveen/minimal-outline/256/search-icon.png'}/>
+        </Pressable>
+                  </View>
                     <View style={{marginLeft:15}}>
-                    <Text style={styles.tituloProduto}>Próximos a Você </Text>
-
+                      <Text style={styles.tituloProduto}>Próximos a Você </Text>
                     </View>
                 </View>
                 <View style={{ height: '68%' }}>
@@ -114,10 +118,17 @@ const styles = StyleSheet.create({
 
 
     },
+    explorarPesquisar: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 15,
+        backgroundColor: '#E4E3FE', 
+        borderRadius: 15,
+    },
     input: {
         backgroundColor: '#E4E3FE',
         width: '90%',
-        marginBottom: 15,
         fontSize: 17,
         fontWeight: '600',
         borderRadius: 7,
@@ -126,7 +137,11 @@ const styles = StyleSheet.create({
 
     },
 
-
+    explorarPesquisarIcone: {
+        height: 20, 
+        width: 20, 
+        marginHorizontal: 6
+    },
     tituloProduto: {
         fontSize: 18,
         fontWeight:'500'
