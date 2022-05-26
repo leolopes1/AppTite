@@ -1,9 +1,9 @@
 import React from 'react'
 import { SafeAreaView, View, Text, Image, StyleSheet, TextInput, Pressable } from 'react-native'
-import TextoCentral from '../components/TextoCentral'
-import PassoStack from '../components/PassoStack'
+import TextoCentral from './components/TextoCentral'
+import PassoStack from './components/PassoStack'
 
-const logo = require('../assets/logo.png')
+const logo = require('./assets/snack-icon.png')
 
 const styles = StyleSheet.create({
     logo: {
@@ -43,15 +43,12 @@ const styles = StyleSheet.create({
 
     },
     btnSubmit:{
-        backgroundColor:'#7677FF',
         width: "90%",
         height:45,
         alignItems:'center',
         justifyContent:'center',
         borderRadius:7,
         marginBottom:15,
-
-
     }
 
 });
@@ -79,7 +76,10 @@ export default function Login ({navigation}) {
                     autoCorrect={false}
                     onChangeText={() => { }}
                 />
-                <Pressable style={styles.btnSubmit} onPress={() => navigation.navigate('TelaA')}>
+                <Pressable style={
+                  ({ pressed }) => [
+                  { backgroundColor: pressed ? '#7879F1' : '#7677FF' }, 
+                  styles.btnSubmit]} onPress={() => navigation.navigate('TelaA')}>
                     <Text style={{color: 'white'}}>Acessar</Text>
                 </Pressable>
                 <Text>Ou</Text>
