@@ -1,9 +1,7 @@
 import React from 'react'
-import { SafeAreaView, View, Text, Image, StyleSheet, TextInput } from 'react-native'
+import { SafeAreaView, View, Text, Image, StyleSheet, TextInput, Pressable } from 'react-native'
 import TextoCentral from '../components/TextoCentral'
 import PassoStack from '../components/PassoStack'
-
-import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const logo = require('../assets/logo.png')
 
@@ -29,14 +27,14 @@ const styles = StyleSheet.create({
     },
     background:{
         flex:1,
-        
         alignItems:'center',
         justifyContent:'center',
         backgroundColor:'white',
     },
     input:{
-        backgroundColor:'#E4E3FE',
         width:'90%',
+        borderWidth: 1,
+        borderColor: '#C2CDD5',
         marginBottom:15,
         fontSize:17,
         fontWeight:'600',
@@ -46,7 +44,7 @@ const styles = StyleSheet.create({
     },
     btnSubmit:{
         backgroundColor:'#7677FF',
-        width:320,
+        width: "90%",
         height:45,
         alignItems:'center',
         justifyContent:'center',
@@ -66,7 +64,6 @@ export default function Login ({navigation}) {
                 <Image
                     style={styles.logo}
                     source={logo}
-
                 />
             </View>
             <View style={styles.container}>
@@ -82,14 +79,13 @@ export default function Login ({navigation}) {
                     autoCorrect={false}
                     onChangeText={() => { }}
                 />
-                <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.navigate('TelaA')}>
-                    <Text>Acessar</Text>
-                </TouchableOpacity>
+                <Pressable style={styles.btnSubmit} onPress={() => navigation.navigate('TelaA')}>
+                    <Text style={{color: 'white'}}>Acessar</Text>
+                </Pressable>
                 <Text>Ou</Text>
-
-                <TouchableOpacity >
-                    <Text>Criar conta</Text>
-                </TouchableOpacity>
+                <Pressable>
+                    <Text style={{color: "blue"}}>Criar conta</Text>
+                </Pressable>
 
             </View>
                 
